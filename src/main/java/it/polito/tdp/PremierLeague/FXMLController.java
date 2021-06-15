@@ -5,8 +5,10 @@
 package it.polito.tdp.PremierLeague;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.PremierLeague.model.GiocatoreConPeso;
 import it.polito.tdp.PremierLeague.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,17 +46,42 @@ public class FXMLController {
 
     @FXML
     void doCreaGrafo(ActionEvent event) {
+    	
+    	double x = Double.parseDouble(txtGoals.getText());
+    	
+    	if(x>0) {
+    		txtResult.clear();
+    		txtResult.appendText(model.creaGrafo(x));
+    		
+    		
+    	} else {
+    		txtResult.appendText("Devi inserire un numero!!");
+    	}
+    	
+    	
 
     }
 
     @FXML
     void doDreamTeam(ActionEvent event) {
 
+    	
+    	
     }
 
     @FXML
     void doTopPlayer(ActionEvent event) {
 
+    	List<GiocatoreConPeso> res = model.getMigliori();
+    	
+    	
+    	txtResult.appendText("TOP PLAYER:"+ model.migliore);
+    	txtResult.appendText("Avversari Battuti\n");
+		
+		for (GiocatoreConPeso gg : res) {
+			txtResult.appendText(gg.getP1().getPlayerID()+" "+ gg.getP1().getName()+" "+ gg.getSommaMinuti()+"\n");
+		}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
